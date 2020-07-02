@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { BrowserQRCodeReader } from "@zxing/library";
@@ -76,7 +76,7 @@ const QrCodeScanner = ({ visible, onClose }: Props) => {
 
   return (
     <Container style={{ display: visible ? "block" : "none" }}>
-      <ScanWindow></ScanWindow>
+      <ScanWindow id="video"></ScanWindow>
       <Footer>
         <FooterIcon>
           <CloseOutlined

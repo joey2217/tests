@@ -5,14 +5,14 @@ import { Card } from "antd";
 
 const ToggleBtn = styled.div`
   position: absolute;
-  right: 10px;
-  top: -30px;
-  width: 30px;
-  height: 30px;
+  right: 30px;
+  top: -60px;
+  width: 60px;
+  height: 60px;
   background-color: #69c0ff;
   border-radius: 4px 4px 0 0;
   text-align: center;
-  line-height: 35px;
+  line-height: 55px;
 `;
 
 const Panel = (props: PropsWithChildren<any>) => {
