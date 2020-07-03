@@ -75,7 +75,7 @@ const AnswerCol = ({ options, answers, num, goQuestion }: Props) => {
             } else if (index === answers[0]) {
               color = "#40a9ff";
             } else if (index === answers[1]) {
-              color = "##f759ab";
+              color = "#f759ab";
             }
           }
           return (

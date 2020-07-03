@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { CloseOutlined, CheckOutlined, LeftOutlined } from "@ant-design/icons";
 import { BrowserQRCodeReader } from "@zxing/library";
-import { notification, message } from "antd";
+import { message } from "antd";
 import AppHeader from "../AppHeader";
 
 interface Props {
   visible: boolean;
   onClose: () => void;
-  onSuccess: (answers:number[]) => void;
+  onSuccess: (answers: number[]) => void;
 }
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const Container = styled.div`
   position: absolute;
   top: 0;
   background: #fff;
-  z-index:100;
+  z-index: 100;
 `;
 const Footer = styled.div`
   position: fixed;
@@ -46,33 +46,25 @@ const ScanWindow = styled.video`
   height: calc(80vh - 45px);
 `;
 
-const QrCodeScanner = ({ visible, onClose,onSuccess }: Props) => {
-  // const [reader,setReader] = useState<BrowserQRCodeReader>();
+const codeReader = new BrowserQRCodeReader();
 
+
+const QrCodeScanner = ({ visible, onClose, onSuccess }: Props) => {
+  // const [reader,setReader] = useState<BrowserQRCodeReader>();
   useEffect(() => {
     (async () => {
       try {
-        const codeReader = new BrowserQRCodeReader();
         const videoInputDevices = await codeReader.listVideoInputDevices();
-        notification.open({
-          message: "摄像头",
-          description: JSON.stringify(videoInputDevices),
-          duration: 0,
-        });
-
+        console.log("摄像头" + JSON.stringify(videoInputDevices));
         const deviceId =
           videoInputDevices[videoInputDevices.length - 1].deviceId;
         const result = await codeReader.decodeOnceFromVideoDevice(
           deviceId,
           "video"
         );
-        notification.open({
-          message: "结果",
-          description: JSON.stringify(result),
-          duration: 0,
-        });
-        message.success('扫描成功!');
-        const answers = JSON.parse(result.getText())
+        console.log("结果" + JSON.stringify(result));
+        message.success("扫描成功!");
+        const answers = JSON.parse(result.getText());
         onSuccess(answers);
       } catch (error) {
         console.log(error);

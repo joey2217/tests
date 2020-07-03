@@ -17,6 +17,8 @@ const Finish = () => {
 
   const ownAnswers = history.location.state as number[];
 
+ const onSuccess =(answers: React.SetStateAction<number[]>) => setOtherAnswer(answers)
+
   return (
     <>
       <AppHeader
@@ -45,7 +47,7 @@ const Finish = () => {
         <QrCodeScanner
           visible={visible}
           onClose={() => setVisible(false)}
-          onSuccess={(answers) => setOtherAnswer(answers)}
+          onSuccess={onSuccess}
         />
       )}
       <QrCodeImg content={JSON.stringify(ownAnswers)} />
