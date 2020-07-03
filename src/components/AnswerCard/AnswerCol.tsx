@@ -70,7 +70,7 @@ const AnswerCol = ({ options, answers, num, goQuestion }: Props) => {
           if (answers.length === 1 && index === answers[0]) {
             color = "#73d13d";
           } else {
-            if (answers[0] === answers[1]) {
+            if (answers[0] === answers[1] && index === answers[0]) {
               color = "#73d13d";
             } else if (index === answers[0]) {
               color = "#40a9ff";

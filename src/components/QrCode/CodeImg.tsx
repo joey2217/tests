@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { BrowserQRCodeSvgWriter } from "@zxing/library";
 import styled from "styled-components";
-import { Button } from "antd";
-import { downSvg } from "../../utils/download";
+// import { Button } from "antd";
+// import { downSvg } from "../../utils/download";
 
 interface Props {
   content: string;
@@ -25,14 +25,14 @@ const CodeImg = ({ content }: Props) => {
   return (
     <ImgContainer>
       <div id="result"></div>
-      <Button
+      {/* <Button
         type="link"
         onClick={() => {
           downSvg("#result svg");
         }}
       >
         下载二维码
-      </Button>
+      </Button> */}
     </ImgContainer>
   );
 };
