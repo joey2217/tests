@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
+import { CloseOutlined, CheckOutlined, LeftOutlined } from "@ant-design/icons";
 import { BrowserQRCodeReader } from "@zxing/library";
-import { notification } from "antd";
+import { notification, message } from "antd";
+import AppHeader from "../AppHeader";
 
 interface Props {
   visible: boolean;
   onClose: () => void;
+  onSuccess: (answers:number[]) => void;
 }
 
 const Container = styled.div`
@@ -15,11 +17,12 @@ const Container = styled.div`
   position: absolute;
   top: 0;
   background: #fff;
+  z-index:100;
 `;
 const Footer = styled.div`
   position: fixed;
   max-height: 20vh;
-  height: 200px;
+  height: 100px;
   width: 100%;
   bottom: 0;
   display: flex;
@@ -40,10 +43,10 @@ const FooterIcon = styled.div`
 
 const ScanWindow = styled.video`
   width: 100%;
-  height: 80vh;
+  height: calc(80vh - 45px);
 `;
 
-const QrCodeScanner = ({ visible, onClose }: Props) => {
+const QrCodeScanner = ({ visible, onClose,onSuccess }: Props) => {
   // const [reader,setReader] = useState<BrowserQRCodeReader>();
 
   useEffect(() => {
@@ -68,14 +71,21 @@ const QrCodeScanner = ({ visible, onClose }: Props) => {
           description: JSON.stringify(result),
           duration: 0,
         });
+        message.success('扫描成功!');
+        const answers = JSON.parse(result.getText())
+        onSuccess(answers);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
+  }, [onSuccess]);
 
   return (
     <Container style={{ display: visible ? "block" : "none" }}>
+      <AppHeader
+        title="扫描二维码"
+        leftIcon={<LeftOutlined onClick={onClose} />}
+      />
       <ScanWindow id="video"></ScanWindow>
       <Footer>
         <FooterIcon>

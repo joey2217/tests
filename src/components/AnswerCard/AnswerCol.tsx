@@ -26,7 +26,7 @@ interface Props {
   options: string[];
   answers: number[];
   num: number;
-  goQuestion?:(index:number)=>void
+  goQuestion?: (index: number) => void;
 }
 
 const letters: string[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -53,7 +53,7 @@ const answerView = (index: number) => {
   );
 };
 
-const AnswerCol = ({ options, answers, num,goQuestion }: Props) => {
+const AnswerCol = ({ options, answers, num, goQuestion }: Props) => {
   return (
     <Wrapper
       xs={2}
@@ -61,7 +61,7 @@ const AnswerCol = ({ options, answers, num,goQuestion }: Props) => {
       md={2}
       lg={2}
       xl={2}
-      onClick={()=>goQuestion&&goQuestion(num)}
+      onClick={() => goQuestion && goQuestion(num)}
     >
       <div style={{ width: "100%", textAlign: "center" }}>{num + 1}</div>
       <AnswerBox>
@@ -69,6 +69,14 @@ const AnswerCol = ({ options, answers, num,goQuestion }: Props) => {
           let color = "";
           if (answers.length === 1 && index === answers[0]) {
             color = "#73d13d";
+          } else {
+            if (answers[0] === answers[1]) {
+              color = "#73d13d";
+            } else if (index === answers[0]) {
+              color = "#40a9ff";
+            } else if (index === answers[1]) {
+              color = "##f759ab";
+            }
           }
           return (
             <AnswerItem key={option} color={color}>

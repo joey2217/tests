@@ -57,7 +57,7 @@ const LoveConcept = () => {
 
   return (
     <>
-      <AppHeader title="测试" />
+      <AppHeader title="测试"/>
       <ProgressWrapper>
         <span>
           {num + 1}/{loveConceptQuestions.length}

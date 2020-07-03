@@ -6,22 +6,26 @@ import QrCodeImg from "../../components/QrCode/CodeImg";
 import loveConceptQuestions from "./data";
 import { useHistory } from "react-router-dom";
 import { Button } from "antd";
-import { join } from "path";
+import { LeftOutlined } from "@ant-design/icons";
 
 const Finish = () => {
   const history = useHistory();
 
   const [visible, setVisible] = useState(false);
   const [useCamera, setUseCamera] = useState(false);
+  const [otherAnswer, setOtherAnswer] = useState<number[]>([]);
 
   const ownAnswers = history.location.state as number[];
 
   return (
     <>
-      <AppHeader title="测试" />
+      <AppHeader
+        title="测试"
+        leftIcon={<LeftOutlined onClick={() => history.goBack()} />}
+      />
       <AnswerCard
         questions={loveConceptQuestions}
-        answerGroup={[[...ownAnswers]]}
+        answerGroup={[[...ownAnswers], [...otherAnswer]]}
       />
       <div style={{ textAlign: "center", padding: "10px 10vw" }}>
         <Button
@@ -38,9 +42,14 @@ const Finish = () => {
         </Button>
       </div>
       {useCamera && (
-        <QrCodeScanner visible={visible} onClose={() => setVisible(false)} />
+        <QrCodeScanner
+          visible={visible}
+          onClose={() => setVisible(false)}
+          onSuccess={(answers) => setOtherAnswer(answers)}
+        />
       )}
-      <QrCodeImg content={JSON.stringify({id:1})} />
+      <QrCodeImg content={JSON.stringify(ownAnswers)} />
+      <div></div>
     </>
   );
 };
